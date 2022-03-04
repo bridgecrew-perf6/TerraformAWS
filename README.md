@@ -1,2 +1,2 @@
 # TerraformAWS
-Deploy Terraform
+Deploy Terraform utilizing terraform cloud and CI/CD Pipelines
