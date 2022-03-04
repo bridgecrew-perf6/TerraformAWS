@@ -15,7 +15,7 @@ terraform {
     organization = "jLucrew"
 
     workspaces {
-      name = "gh-action"
+      name = "github-action"
     }
   }
 }
