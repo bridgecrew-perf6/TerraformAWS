@@ -45,8 +45,6 @@ resource "aws_instance" "web" {
     sudo chmod +x /usr/local/bin/docker-compose
     sudo docker run -d -p 3000:80
   EOF
-              
-              EOF
 }
 
 resource "aws_security_group" "web-sg" {
