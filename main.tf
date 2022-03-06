@@ -36,8 +36,11 @@ resource "aws_instance" "web" {
 
   user_data = <<-EOF
               #!/bin/bash
-              echo "Hello, World" > index.html
-              nohup busybox httpd -f -p 8080 &
+              yum -y install docker
+              systemctl enable docker
+              systemctl start docker
+              docker pull jordanjlu/nginxsite:latest
+              docker run -d -p 3000:80
               EOF
 }
 
