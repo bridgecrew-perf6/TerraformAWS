@@ -57,8 +57,6 @@ resource "aws_security_group" "web-sg" {
     ipv6_cidr_blocks = ["::/0"]
   }
 }
-  }
-}
 
 output "web-address" {
   value = "${aws_instance.web.public_dns}:8080"
