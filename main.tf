@@ -36,11 +36,6 @@ resource "aws_instance" "web" {
 
   user_data = <<-EOF
               #!/bin/bash
-              sudo apt update
-              sudo apt install apt-transport-https ca-certificates curl software-properties-common
-              sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-              apt-cache policy docker-ce
-              sudo apt install docker-ce
               sudo docker run -p -d jordanjlu/nginxsite:latest
               sudo ufw allow 8080
               EOF
