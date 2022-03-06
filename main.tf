@@ -43,7 +43,7 @@ resource "aws_instance" "web" {
                 lsb-release
               sudo apt-get update
               sudo apt-get install docker-ce docker-ce-cli containerd.io
-              sudo docker run jordanjlu/nginxsite:latest
+              sudo docker run -p 8080:8080 jordanjlu/nginxsite:latest
               EOF
 }
 
