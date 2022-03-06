@@ -44,6 +44,7 @@ resource "aws_instance" "web" {
               sudo apt-get update
               sudo apt-get install docker-ce docker-ce-cli containerd.io
               sudo docker run -p 8080:8080 jordanjlu/nginxsite:latest
+              sudo ufw allow 8080
               EOF
 }
 
