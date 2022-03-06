@@ -40,7 +40,8 @@ resource "aws_instance" "web" {
                sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
                apt-cache policy docker-ce
                sudo apt install docker-ce
-               docker run -d -p 3000:8080 jordanjlu/nginxsite:latest
+               docker run -d -p 8080:8080 jordanjlu/nginxsite:latest
+               -p 8080:8080
               EOF
 }
 
