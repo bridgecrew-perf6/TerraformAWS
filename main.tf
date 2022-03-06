@@ -36,8 +36,14 @@ resource "aws_instance" "web" {
 
   user_data = <<-EOF
               #!/bin/bash
-              echo "Hello, World" > index.html
-              nohup busybox httpd -f -p 8080 &
+              sudo apt-get install \
+                ca-certificates \
+                curl \
+                gnupg \
+                lsb-release
+              sudo apt-get update
+              sudo apt-get install docker-ce docker-ce-cli containerd.io
+              sudo docker run jordanjlu/nginxsite:latest
               EOF
 }
 
