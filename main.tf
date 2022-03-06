@@ -25,7 +25,9 @@ provider "aws" {
   region = "us-east-2"
 }
 
-
+data "aws_ami" "amazon_linux_2" {
+  most_recent = true
+  owners      = ["amazon"]
 
 resource "random_pet" "sg" {}
 
