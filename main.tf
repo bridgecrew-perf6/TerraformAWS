@@ -34,11 +34,7 @@ resource "aws_instance" "web" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
 
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo docker run -p -d jordanjlu/nginxsite:latest
-              sudo ufw allow 8080
-              EOF
+  user_data = "${file("user_data/launch_config_user_data.sh")}"
 }
 
 resource "aws_security_group" "web-sg" {
