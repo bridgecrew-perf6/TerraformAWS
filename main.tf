@@ -41,7 +41,7 @@ resource "aws_instance" "web" {
                apt-cache policy docker-ce
                sudo apt install docker-ce
                docker run -d -p 8080:8080 jordanjlu/nginxsite:latest
-               -p 8080:8080
+               sudo ufw allow 8080
               EOF
 }
 
