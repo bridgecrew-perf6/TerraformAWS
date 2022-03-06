@@ -36,25 +36,27 @@ resource "aws_instance" "web" {
 
   user_data = <<-EOF
               #!/bin/bash
-              sudo apt-get install \
-                ca-certificates \
-                curl \
-                gnupg \
-                lsb-release
-              sudo apt-get update
-              sudo apt-get install docker-ce docker-ce-cli containerd.io
-              sudo docker run -p 8080:8080 jordanjlu/nginxsite:latest
+              sudo apt update
+              sudo apt install apt-transport-https ca-certificates curl software-properties-common
+              sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+              apt-cache policy docker-ce
+              sudo apt install docker-ce
+              sudo docker run -p -d jordanjlu/nginxsite:latest
               sudo ufw allow 8080
               EOF
 }
 
 resource "aws_security_group" "web-sg" {
-  name = "${random_pet.sg.id}-sg"
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+  # ... other configuration ...
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+}
   }
 }
 
