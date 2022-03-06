@@ -22,7 +22,7 @@ terraform {
 
 
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-2"
 }
 
 
@@ -30,17 +30,22 @@ provider "aws" {
 resource "random_pet" "sg" {}
 
 resource "aws_instance" "web" {
-  ami                    = "ami-04505e74c0741db8d"
+  ami                    = "data.aws_ami.amazon_linux_2.id"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
 
   user_data = <<-EOF
-              #!/bin/bash
-              yum -y install docker
-              systemctl enable docker
-              systemctl start docker
-              docker pull jordanjlu/nginxsite:latest
-              docker run -d -p 3000:80
+    #!/bin/bash
+    set -ex
+    sudo yum update -y
+    sudo amazon-linux-extras install docker -y
+    sudo service docker start
+    sudo usermod -a -G docker ec2-user
+    sudo curl -L https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    sudo docker run -d -p 3000:80
+  EOF
+              
               EOF
 }
 
