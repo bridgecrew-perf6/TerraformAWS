@@ -25,15 +25,11 @@ provider "aws" {
   region = "us-east-2"
 }
 
-data "aws_ami" "amazon_linux_2" {
-  most_recent = true
-  owners      = ["amazon"]
-}
 
 resource "random_pet" "sg" {}
 
 resource "aws_instance" "web" {
-  ami                    = "data.aws_ami.amazon_linux_2.id"
+  ami                    = "ami-0c293f3f676ec4f90"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
 
