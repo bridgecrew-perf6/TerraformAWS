@@ -1,2 +1,2 @@
 # TerraformAWS
-Deploy Terraform utilizing terraform cloud and CI/CD Pipelines with secrets in cloud
+Deploy docker ec2 utilizing terraform cloud and CI/CD Pipelines with secrets in clou
