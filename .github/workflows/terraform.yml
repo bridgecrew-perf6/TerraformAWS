@@ -25,8 +25,6 @@ jobs:
         id: init
         run: terraform init
         
-      - name: check value
-        run: echo "${{ github.event.release.name }} ${{ github.event.release.body }}"
       
       - name: Terraform Validate
         id: validate
@@ -47,5 +45,5 @@ jobs:
         run: terraform apply -auto-approve
         
       - name: Terraform Destroy
-        if: github.ref == 'refs/heads/main' && github.event.commits[0].message != 'Push'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'Push'
         run: terraform destroy -auto-approve
