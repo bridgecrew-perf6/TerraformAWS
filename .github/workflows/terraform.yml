@@ -40,9 +40,9 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if:  github.event_name == 'Push' || github.event.head_commit.message == 'Apply'
+        if:  github.event_name == 'Push' || github.event.commits[0].message == 'Apply'
         run: terraform apply -auto-approve
         
       - name: Terraform Destroy
-        if: github.ref == 'refs/heads/main' && github.event.head_commit.message == 'Destroy'
+        if: github.ref == 'refs/heads/main' && github.event.commits[0].message == 'Destroy'
         run: terraform destroy -auto-approve
