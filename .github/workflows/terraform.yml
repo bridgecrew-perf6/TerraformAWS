@@ -24,6 +24,9 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+        
+      - name: check value
+        run: echo "Name: ${{ github.event.release.name }} Description: ${{ github.event.release.body }}"
       
       - name: Terraform Validate
         id: validate
