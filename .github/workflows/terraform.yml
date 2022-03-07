@@ -44,5 +44,5 @@ jobs:
         run: terraform apply -auto-approve
         
       - name: Terraform Destroy
-        if: github.ref == 'refs/heads/main' && GITHUB_EVENT_NAME != 'Push'
+        if: github.ref == 'refs/heads/main' && GITHUB.EVENT_NAME != 'Push'
         run: terraform destroy -auto-approve
