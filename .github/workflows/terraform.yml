@@ -39,10 +39,10 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      - name: Terraform Apply or Destroy
+      - name: Terraform Apply (Only on Push)
         if: github.ref == 'refs/heads/main' && github.event_name == 'Push'
         run: terraform apply -auto-approve
         
-      - name: Terraform Destroy
+      - name: Terraform Destroy (Only in App)
         if: github.ref == 'refs/heads/main' && GITHUB.EVENT_NAME != 'Push'
         run: terraform destroy -auto-approve
